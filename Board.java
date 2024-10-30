@@ -21,8 +21,15 @@ public class Board
     System.out.println("Phrase: " + phrase);
   }
   /* your code here - accessor(s) */
-  
+  public String getSolvedPhrase() {
+
+  }
+
+  public int getLetterValue() {
+
+  }
   /* your code here - mutator(s)  */
+  
 
 
   /* ---------- provided code, do not modify ---------- */
@@ -32,7 +39,7 @@ public class Board
     currentLetterValue = randomInt;
   }
 
-  public boolean isSolved(String guess)
+  public boolean isSolved(String guess) // could be known as solvePhrase
   {
     if (phrase.equals(guess))
     {
@@ -41,7 +48,7 @@ public class Board
     return false;
   }
 
-  private String loadPhrase()
+  public String loadPhrase()
   {
     String tempPhrase = "";
     
@@ -87,25 +94,33 @@ public class Board
     
     return tempPhrase;
   }  
-
+  /* Checks if a letter exists in the phrase, if so, gets added to the displayed phrase.
+   * 
+   * Precondition:
+   *  phrase has been set via constructor.
+   *  guess is a single character.
+   * 
+   * Postcondition:
+   *  The phrase displayed is updated to include the letter if it is there.
+   */
   public boolean guessLetter(String guess)
   {
-    boolean foundLetter = false;
-    String newSolvedPhrase = "";
+    boolean foundLetter = false; // initialize whether a letter is found to false
+    String newSolvedPhrase = ""; // establish empty string
     
-    for (int i = 0; i < phrase.length(); i++)
+    for (int i = 0; i < phrase.length(); i++) // loop by index through phrase
     {
-      if (phrase.substring(i, i + 1).equals(guess))
+      if (phrase.substring(i, i + 1).equals(guess)) // check letter at index i
       {
-        newSolvedPhrase += guess + " ";
-        foundLetter = true;
+        newSolvedPhrase += guess + " "; // if it's equal add it to newSolvedPhrase
+        foundLetter = true; // letter found so change it
       }
       else
       {
-        newSolvedPhrase += solvedPhrase.substring(i * 2, i * 2 + 1) + " ";  
+        newSolvedPhrase += solvedPhrase.substring(i * 2, i * 2 + 1) + " "; // if not guessed don't reveal letter
       }
     }
-    solvedPhrase = newSolvedPhrase;
-    return foundLetter;
+    solvedPhrase = newSolvedPhrase; // with new guess added
+    return foundLetter; // tell user if guess exists
   } 
 } 
